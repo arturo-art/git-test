@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h2>
+        @RenderSection("Header",false)
+    </h2>
+    <div>
+        @RenderBody()
+    </div>
+    <div>
+        @DateTime.Now.ToString()
+        @RenderSection("Footer", required: false)
+    </div>
+</body>
+</html>

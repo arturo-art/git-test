@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>
+        @RenderSection("Header", false)
+    </h2>
+    <div class="container">
+        <div>
+            @RenderBody()
+        </div>
+        <div>
+            @RenderSection("Footer", required: false)
+            @await Component.InvokeAsync("Greeter")
+        </div>
+    </div>
+    @RenderSection("Scripts", false)
+</body>
+</html>

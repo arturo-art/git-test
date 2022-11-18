@@ -1,0 +1,66 @@
+﻿@using EmptyCore.Models;
+@model Restaurant
+@{
+    ViewBag.Title = "Create";
+}
+<h1>Create</h1>
+
+<form method="post" id="addRestaurant">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Cuisine"></label>
+        <select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<CuisineType>()">
+        </select>
+        <span asp-validation-for="Cuisine"></span>
+    </div>
+    <button id="btnSave" name="save">Save</button>
+    <button id="btnGet" name="btnGet">Get Api</button>
+</form>
+    @section scripts{
+        <script src="~/node_modules/jquery/dist/jquery.js"></script>
+        <script>
+            $(function () {
+                $('#btnGet').on('click', function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "/api/Food/GetAll/1",
+                        type: "Get"//,
+                        //data: "Json",
+                        //dataType: "Json"
+                    }).done(function (data) {
+                        alert(data);
+                    }).fail(function (data) {
+                        alert("fail");
+                    });
+                });
+                $('#btnSave').on('click', function (e) {
+                    e.preventDefault();
+                    //if ($('#addRestaurant').valid()) {
+                    $.ajax({
+                        url: "/Home/Create",
+                        data: $('#addRestaurant').serialize(),
+                        //data: { "Name": "asdf", "Cuisine": "1" },
+                        type: "Post",
+                        //dataType: "Json",
+                        //success: function (data) {
+                        //    alert(data);
+                        //},
+                        //error: function (data) {
+                        //    //alert(data.statusCode);
+                        //    //alert(data);
+                        //}
+                    }).done(function (data) {
+                        alert(data);
+                    }).fail(function (data) {
+                        alert(data.responseText);
+                    });
+                    //}
+                });
+            });
+
+        </script>
+    }
